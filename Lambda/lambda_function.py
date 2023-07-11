@@ -123,10 +123,22 @@ def recommend_portfolio(intent_request):
     investment_amount = get_slots(intent_request)["investmentAmount"]
     risk_level = get_slots(intent_request)["riskLevel"]
     source = intent_request["invocationSource"]
-
-    # YOUR CODE GOES HERE!
-
-
+    
+    recommendation = ""
+ 
+    if int(age) > 0 and int(age) <= 65:
+        if int(investment_amount) >= 5000:
+            if risk_level == "none":
+                recommendation = "100% bonds (AGG), 0% equities (SPY)"
+            elif risk_level == "low":
+                recommendation = "60% bonds (AGG), 40% equities (SPY)"
+            elif risk_level == "medium":
+                recommendation = "40% bonds (AGG), 60% equities (SPY)"
+            elif risk_level == "high":
+                recommendation = "20% bonds (AGG), 80% equities (SPY)"
+    return recommendation 
+                
+                
 ### Intents Dispatcher ###
 def dispatch(intent_request):
     """
